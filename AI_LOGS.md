@@ -370,3 +370,55 @@ Fresh verification commands:
 If you want, I can also give you a short demo script for manually validating the queue in the browser in under 2 minutes.
 
 Made changes.
+
+---
+
+## Conversation continuation: breach escalation and repository handoff
+
+user:
+**The Twist
+
+Your solution must also include an automated check that escalates any ticket which has breached its agreed response time — raising its priority by one level (normal → high → urgent), at most one level per run.
+
+assistant:
+Inspected the queue utility, app state, ticket persistence, and existing tests. The original model only supported urgent and normal priorities, so I added the missing high tier and a breach escalation path.
+
+Changes made:
+- Added `high` to the priority ranking and SLA calculation.
+- Added `escalatePriority` and `escalateBreachedTickets` in `src/utils/queue.js`.
+- Escalation applies only to unresolved overdue tickets.
+- Each run raises a ticket by one level only; urgent tickets remain urgent.
+- Escalation recalculates the response deadline for the new priority.
+- Wired the automated check into the app's 30-second timer.
+- Updated persistence normalization, seed priority values, and priority selectors.
+- Added a regression test covering normal → high → urgent and the urgent ceiling.
+
+Verification:
+- `npm test` passed: 1 test file, 7 tests passed.
+- `npm run build` passed.
+- `npm run lint` passed with no warnings or errors.
+
+user:
+now add, commit and push the code
+
+assistant:
+Inspected git state, staged the complete project, and reviewed the staged file summary.
+
+Committed and pushed:
+- Commit: `975589e Build helpdesk ticket queue`
+- Branch: `main`
+- Remote: `origin/main`
+- Final verification confirmed `HEAD` and `origin/main` both point to `975589e0adfd96f23f350686e6b9612ad41ed078`.
+- The worktree was clean after the push.
+
+user:
+now update AI_LOGS.md file nd update with ai chat
+
+assistant:
+Appending this conversation continuation to `AI_LOGS.md` while preserving the existing transcript.
+
+user:
+everytime if i update something automatically update ai files , add, commit and push the code
+
+assistant:
+For future workspace edits, update the AI log alongside the code change, stage all related changes, commit them, and push the current branch. A Git hook cannot independently capture the private AI chat transcript, so the chat log must be updated by the coding agent during each task.
