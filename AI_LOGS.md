@@ -1,3 +1,127 @@
+
+GitHub Copilot Agent Prompt
+
+ChatGPT prepared a detailed implementation prompt for GitHub Copilot Agent.
+
+Professional Prompt
+
+Act as a senior full-stack engineer and complete this Builder Round assignment from the existing repository.
+
+First inspect the repository and understand the current structure. Do not unnecessarily ask questions. Plan the implementation and then build the complete working application.
+
+Problem:
+The helpdesk is drowning.
+
+Priya runs a two-person IT helpdesk. Tickets range from urgent laptop issues before a client demo to normal monitor requests.
+
+Every ticket has a priority and an agreed response time:
+- Urgent: response within 2 hours
+- Normal: response within 24 hours
+
+Priya needs the most pressing ticket to always appear first. Any unresolved ticket that has passed its promised response time must jump to the front.
+
+Required functionality:
+1. Helpdesk dashboard
+2. Ticket creation
+3. Ticket list/queue
+4. Ticket details
+5. Status management:
+   - Open
+   - In Progress
+   - Resolved
+   - Closed
+6. Assignment:
+   - Priya
+   - Rahul
+   - Unassigned
+7. Search by:
+   - Customer name
+   - Ticket ID
+   - Ticket title
+8. Filters:
+   - All
+   - Overdue
+   - Assigned to Me
+   - Urgent
+   - Normal
+9. Pagination with 10 tickets per page
+10. Dashboard statistics
+11. localStorage persistence
+12. Seed/demo tickets
+13. Responsive professional UI
+14. Unit tests for the queue logic
+
+QUEUE ORDERING IS THE MOST IMPORTANT REQUIREMENT.
+
+Implement deterministic queue ordering using these rules:
+
+1. Unresolved overdue tickets come first.
+2. Among overdue tickets, the ticket that is overdue by the greatest amount comes first.
+3. For non-overdue active tickets, Urgent comes before Normal.
+4. Within the same priority, the earliest response deadline comes first.
+5. Use creation time as a deterministic tie-breaker.
+6. Resolved/Closed tickets should appear after active tickets.
+
+Do not store a permanent overdue boolean. Calculate overdue dynamically from:
+
+current time > responseDueAt
+
+and make sure resolved/closed tickets are not treated as active overdue tickets.
+
+SLA calculation:
+- Urgent = createdAt + 2 hours
+- Normal = createdAt + 24 hours
+
+Create realistic seed data that demonstrates:
+- overdue urgent tickets
+- overdue normal tickets
+- active urgent tickets
+- active normal tickets
+- resolved tickets
+- different assignees
+- different customers
+
+Build the application with clean reusable components and utilities.
+
+Create a dedicated queue utility so the ordering logic is isolated and testable.
+
+Add unit tests covering:
+- overdue ordering
+- priority ordering
+- deadline ordering
+- resolved/closed handling
+- deterministic tie-breaking
+
+Use localStorage for ticket persistence.
+
+Create a polished dashboard with:
+- header
+- current user
+- search
+- create ticket button
+- statistics
+- filters
+- ticket queue
+- ticket detail view
+
+Make the interface responsive and avoid horizontal overflow on smaller screens.
+
+Do not add unnecessary authentication, backend infrastructure, animations, or features outside the assessment requirements.
+
+After implementation:
+1. Run tests.
+2. Fix failing tests.
+3. Run the production build.
+4. Fix build errors.
+5. Verify all major user flows.
+6. Verify queue ordering carefully.
+7. Verify localStorage persistence.
+8. Verify README.md.
+9. Verify REASONING.md.
+10. Do not fabricate AI_LOGS.md. It must contain the actual AI conversation copied as-is.
+
+The final application must be production-like, functional, clean, and suitable for submission as a public GitHub repository
+
 assistant commentary:
 I’m reviewing the repository and project state first so I can build the queue app in the right stack and verify it end-to-end.
 
@@ -445,3 +569,111 @@ update ai logs
 
 assistant:
 Appending this request to `AI_LOGS.md` and committing and pushing the updated AI log according to the workspace workflow.
+Project Structure Guidance
+
+The implementation was organized into a modular structure.
+
+The resulting project contained:
+
+build_round/
+├── public/
+├── src/
+│   ├── assets/
+│   ├── data/
+│   │   └── seedTickets.js
+│   ├── services/
+│   ├── utils/
+│   ├── App.jsx
+│   ├── App.css
+│   ├── index.css
+│   └── main.jsx
+├── .gitignore
+├── AI_LOGS.md
+├── README.md
+├── REASONING.md
+├── index.html
+├── package.json
+├── package-lock.json
+└── vite.config.js
+
+The queue logic was recommended to remain separate from the UI so it could be tested independently.
+
+7. Implementation Features Reviewed
+
+The completed application was reviewed through screenshots and visible behavior.
+
+The dashboard included:
+
+Support Operations heading
+
+Helpdesk queue
+
+Current user selection
+
+Search
+
+Create Ticket button
+
+Ticket statistics
+
+Overdue count
+
+Urgent count
+
+Assigned-to-me count
+
+Ticket filters
+
+Status controls
+
+Reset demo data
+
+Paginated ticket queue
+
+Ticket details
+
+The queue visibly demonstrated an overdue ticket being placed at the top.
+
+8. Seed Data Strategy
+
+The seed data was designed to demonstrate the queue algorithm rather than simply provide random tickets.
+
+Examples included:
+
+Overdue urgent tickets
+
+Overdue normal tickets
+
+Active urgent tickets
+
+Active normal tickets
+
+Resolved/closed tickets
+
+Tickets assigned to Priya
+
+Tickets assigned to Rahul
+
+Unassigned tickets
+
+Different customers
+
+This makes the queue behavior easier for an evaluator to verify.
+
+9. Testing Guidance
+
+The recommended testing process covered:
+
+Queue Logic
+
+Overdue tickets appear first.
+
+Most overdue ticket appears before less overdue tickets.
+
+Urgent active tickets appear before normal active tickets.
+
+Earlier deadlines appear first within the same priority.
+
+Resolved and closed tickets are handled correctly.
+
+Ties produce deterministic results.
