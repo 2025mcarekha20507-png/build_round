@@ -428,3 +428,14 @@ now create a reasioning.md file and explain the reasoining bind this developing 
 
 assistant:
 Reviewed the existing `REASONING.md` and expanded it to explain the reasoning behind the helpdesk software. The documentation now covers the problem interpretation, queue ordering, data model, architecture, one-level breach escalation, edge cases, testing strategy, trade-offs, and future improvements. It also corrects the queue-processing description so it matches the implementation: the global queue is sorted first, then search and filters are applied, followed by pagination.
+
+user:
+Fix the responsive layout issue visible in the current Helpdesk Queue application. Remove unnecessary horizontal page scrolling, keep the dashboard within the viewport, wrap long emails/customer names/ticket titles/descriptions safely, use `min-width: 0` where appropriate, preserve the responsive design, and do not change application behavior or the queue algorithm.
+
+assistant:
+Inspected the existing CSS and corrected intrinsic sizing at the top bar, grid, panel, card, and flex-child boundaries. Added safe wrapping for long ticket content and detail values, constrained form controls to their containers, and preserved the existing responsive breakpoints without introducing horizontal scrolling.
+
+Validation:
+- `npm run build` passed.
+- Browser checks at 1440px and 390px confirmed `document.scrollWidth` equals the viewport width.
+- Selected ticket detail email measurements showed `scrollWidth` equals `clientWidth` at both viewports.

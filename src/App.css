@@ -1,5 +1,6 @@
 .app-shell {
   width: min(1440px, calc(100% - 32px));
+  min-width: 0;
   margin: 32px auto;
   display: flex;
   flex-direction: column;
@@ -16,6 +17,12 @@
   border: 1px solid rgba(148, 163, 184, 0.15);
   border-radius: 22px;
   box-shadow: 0 15px 35px rgba(15, 23, 42, 0.14);
+}
+
+.topbar > div,
+.topbar-controls,
+.searchbox {
+  min-width: 0;
 }
 
 .topbar h1 {
@@ -73,6 +80,7 @@
 
 .searchbox input {
   min-width: min(320px, 50vw);
+  max-width: 100%;
 }
 
 .primary-button,
@@ -212,6 +220,14 @@
   gap: 20px;
 }
 
+.content-grid > *,
+.panel,
+.queue-panel,
+.detail-panel,
+.ticket-card {
+  min-width: 0;
+}
+
 .queue-panel {
   padding: 20px;
 }
@@ -265,6 +281,15 @@
   align-items: center;
   justify-content: space-between;
   gap: 12px;
+}
+
+.ticket-card-top > *,
+.customer-row > *,
+.card-actions > *,
+.detail-header > *,
+.button-row > *,
+.pagination > * {
+  min-width: 0;
 }
 
 .meta-block {
@@ -338,6 +363,7 @@
   margin: 16px 0 8px;
   color: #f8fafc;
   font-size: 1.2rem;
+  overflow-wrap: anywhere;
 }
 
 .customer-row {
@@ -351,6 +377,7 @@
   margin: 0;
   color: #dbeafe;
   line-height: 1.5;
+  overflow-wrap: anywhere;
 }
 
 .ticket-meta-grid {
@@ -367,6 +394,8 @@
   display: flex;
   flex-direction: column;
   gap: 4px;
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .meta-label {
@@ -390,6 +419,16 @@
   gap: 8px;
   color: #dbeafe;
   font-size: 0.82rem;
+  min-width: 0;
+}
+
+.card-actions select,
+.detail-actions select,
+.ticket-form input,
+.ticket-form textarea,
+.ticket-form select {
+  max-width: 100%;
+  min-width: 0;
 }
 
 .pagination {
@@ -416,6 +455,7 @@
   margin: 12px 0 18px;
   color: #dbeafe;
   line-height: 1.6;
+  overflow-wrap: anywhere;
 }
 
 .detail-grid {
@@ -428,6 +468,7 @@
   background: rgba(30, 41, 59, 0.45);
   border-radius: 14px;
   padding: 12px;
+  min-width: 0;
 }
 
 .detail-grid dt {
@@ -442,6 +483,7 @@
   margin: 0;
   color: #f8fafc;
   font-weight: 600;
+  overflow-wrap: anywhere;
 }
 
 .detail-actions {
